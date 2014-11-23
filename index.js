@@ -1,6 +1,12 @@
 var github = require('github');
 var identity = require('./client_identity.json');
 
+function globalCb(err) {
+  if(err) {
+    console.log(err)
+  }
+}
+
 function Gistify() {
   this._github = new github({
     version: '3.0.0'
@@ -8,6 +14,10 @@ function Gistify() {
 };
 
 Gistify.prototype.authenticate = function(username, password, twoFactorOpts, cb) {
+  if(!cb) {
+    cb = globalCb;
+  }
+
   this._github.authenticate({
     type: 'basic',
     username: username,
@@ -36,19 +46,33 @@ Gistify.prototype.authenticate = function(username, password, twoFactorOpts, cb)
   });
 };
 
+Gistify.prototype.authenticateToken = function(token, cb) {
+  if(!cb) {
+    cb = globalCb;
+  }
+  this._github.authenticate({
+    type:'oauth',
+    token: token
+  });
+
+  cb(null, true);
+};
+
 Gistify.prototype.create = function(description, public, files, cb) {
+  if(!cb) {
+    cb = globalCb;
+  }
   var opts = {
     description: description,
     public: public,
     files: files
   }
 
-  console.log(opts);
   this._github.gists.create(opts, function(err, res) {
     if(err) {
       cb(err);
     } else {
-      cb(true);
+      cb(null, true);
     }
   })
 };
