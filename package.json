@@ -1,0 +1,28 @@
+{
+  "name": "gistify",
+  "version": "0.0.0",
+  "description": "Create gists from the command line or code.",
+  "main": "index.js",
+  "dependencies": {
+    "github": "~0.2.3",
+    "commander": "~2.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdobson/gistify.git"
+  },
+  "keywords": [
+    "gists",
+    "github"
+  ],
+  "author": "Matthew Dobson <@mdobs>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mdobson/gistify/issues"
+  },
+  "homepage": "https://github.com/mdobson/gistify"
+}
