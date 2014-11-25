@@ -30,16 +30,18 @@ program
   .version('0.0.1');
 
 function gistifyFile(description, pub, file) {
-  console.log('[Gistify] -- Gistifying file: ' + file.info);
   if(Array.isArray(file)) {
     var obj = {};
     file.forEach(function(f) {
       var base = path.basename(f);
+      console.log('[Gistify] -- Gistifying file: ' + base.info);
       var data = fs.readFileSync(f);
       obj[base] = { 'content': data.toString() };
     });
     gistify.create(description, pub, obj);
   } else {
+
+    console.log('[Gistify] -- Gistifying file: ' + file.info);
     fs.readFile(file, function(err, data) {
       if(err) {
         console.log('Error reading file. ' + err.error);
